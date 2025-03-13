@@ -3,11 +3,15 @@ import s from "./SearchBar.module.css";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-const SearchBar = ({ onSubmit }) => {
+interface SearchBarProps {
+  onSubmit: (query: string) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
   const [value, setValue] = useState("");
   const [previousQuery, setPreviousQuery] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const trimmedValue = value.trim();
 

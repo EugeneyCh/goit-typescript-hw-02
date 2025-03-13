@@ -8,13 +8,9 @@ import { DNA } from "react-loader-spinner";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
+import { Image } from "./types";
 
-interface Image {
-  id: number;
-  urls: string;
-  alt_description: string;
 
-}
 
 function App() {
   const [images, setImages] = useState<Image[]>([]);
@@ -26,7 +22,7 @@ function App() {
   const [modalIsOpen, setIsOpen] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<Image | null>(null);
 
-  const firstNewImageRef = useRef(null);
+  const firstNewImageRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (!query) return;
@@ -55,14 +51,16 @@ function App() {
     getData();
   }, [query, page]);
 
+
+
   useEffect(() => {
     if (firstNewImageRef.current && page > 1) {
       const timeoutId = setTimeout(() => {
-        const element = document.getElementById(firstNewImageRef.current);
+        const element = document.getElementById(firstNewImageRef.current || "") as HTMLElement | null;
+
         if (element) {
           const yOffset = -100;
-          const y =
-            element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
           window.scrollTo({
             top: y,
@@ -75,7 +73,7 @@ function App() {
     }
   }, [images, page]);
 
-  const handleSetQuery = (newQuery) => {
+  const handleSetQuery = (newQuery: string) => {
     if (newQuery.trim() === query.trim()) return;
     setQuery(newQuery);
     setImages([]);
@@ -86,7 +84,7 @@ function App() {
     setPage((prev) => prev + 1);
   };
 
-  const openModal = (image) => {
+  const openModal = (image: Image): void => {
     setSelectedImage(image);
     setIsOpen(true);
   };
@@ -96,7 +94,7 @@ function App() {
     setSelectedImage(null);
   };
 
-  const handleOverlayClick = (event) => {
+  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       closeModal();
     }
@@ -111,7 +109,7 @@ function App() {
         selectedImage={selectedImage}
       />
       <Toaster position="top-center" reverseOrder={false} />
-      <SearchBar onSubmit={handleSetQuery} query={query} />
+      <SearchBar onSubmit={handleSetQuery} />
 
       {isError ? (
         <ErrorMessage />

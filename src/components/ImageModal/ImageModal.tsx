@@ -1,14 +1,32 @@
 import Modal from "react-modal";
 import s from "./ImageModal.module.css";
+import { FC } from "react";
 
 Modal.setAppElement("#root");
 
-function ImageModal({
-  handleOverlayClick,
+interface Image {
+  urls: { regular: string };
+  alt_description?: string;
+}
+
+interface ImageModalProps {
+  handleOverlayClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+  modalIsOpen: boolean;
+  closeModal: () => void;
+  selectedImage: Image | null;
+}
+
+// interface ModalClickProps {
+//   handleOverlayClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+// }
+
+
+const ImageModal: FC<ImageModalProps> = ({
+  // handleOverlayClick,
   modalIsOpen,
   closeModal,
   selectedImage,
-}) {
+}: ImageModalProps) => {
   const customStyles = {
     content: {
       top: "50%",
@@ -35,7 +53,7 @@ function ImageModal({
         style={customStyles}
         contentLabel="Image Modal"
         shouldCloseOnOverlayClick={true}
-        onClick={handleOverlayClick}
+      // onClick={handleOverlayClick}
       >
         {selectedImage && (
           <img
