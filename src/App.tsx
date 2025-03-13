@@ -9,15 +9,22 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
 
+interface Image {
+  id: number;
+  urls: string;
+  alt_description: string;
+
+}
+
 function App() {
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [images, setImages] = useState<Image[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
 
   const firstNewImageRef = useRef(null);
 
