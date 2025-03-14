@@ -1,13 +1,10 @@
 import Modal from "react-modal";
 import s from "./ImageModal.module.css";
 import { FC } from "react";
+import { Image } from "../../types";
 
 Modal.setAppElement("#root");
 
-interface Image {
-  urls: { regular: string };
-  alt_description?: string;
-}
 
 interface ImageModalProps {
   handleOverlayClick: (event: React.MouseEvent<HTMLDivElement>) => void;
@@ -15,10 +12,6 @@ interface ImageModalProps {
   closeModal: () => void;
   selectedImage: Image | null;
 }
-
-// interface ModalClickProps {
-//   handleOverlayClick: (event: React.MouseEvent<HTMLDivElement>) => void;
-// }
 
 
 const ImageModal: FC<ImageModalProps> = ({

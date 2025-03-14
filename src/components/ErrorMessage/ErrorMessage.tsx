@@ -1,6 +1,8 @@
+import { FC } from "react";
 import s from "./ErrorMessage.module.css";
 
-function ErrorMessage() {
+
+const ErrorMessage: FC = () => {
   return (
     <div className={s.errorMessage}>
       <h2>Something went wrong! Try again later...</h2>

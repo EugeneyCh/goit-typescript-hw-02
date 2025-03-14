@@ -1,6 +1,9 @@
 export interface Image {
     id: number;
-    urls: { regular: string };
-    alt_description?: string;
+    alt_description: string;
+    urls: {
+        small?: string;
+        regular?: string;
+    };
 
 }
