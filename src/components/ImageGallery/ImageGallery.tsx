@@ -6,7 +6,6 @@ import s from "./ImageGallery.module.css";
 interface ImageGalleryProps {
   images: Image[];
   openModal: (image: Image) => void;
-  // (image: Image): void
 }
 
 const ImageGallery: FC<ImageGalleryProps> = ({ images, openModal }) => {
@@ -17,7 +16,6 @@ const ImageGallery: FC<ImageGalleryProps> = ({ images, openModal }) => {
           className={s.imageCard}
           key={item.id}
           id={`${item.id}`}
-        // onClick={() => openModal(item)}
         >
           <ImageCard item={item} openModal={openModal} />
         </li>
